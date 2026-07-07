@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honeycomb Oasis | Server Hub</title>
+    <style>
+        :root {
+            --bg-color: #0d0a05; /* Deep rich dark brown/black */
+            --card-bg: #1c150b; /* Honey-tinted dark card backgrounds */
+            --accent-color: #ffb300; /* Pure golden honey amber */
+            --accent-hover: #ffca28; /* Shining bright gold */
+            --text-color: #fff8e1; /* Warm, soft honey-tinted white */
+            --text-muted: #d7ccc8; /* Soft warm amber-gray */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px 20px 20px;
+            background: linear-gradient(180deg, rgba(255, 179, 0, 0.25) 0%, rgba(13, 10, 5, 1) 100%);
+            border-bottom: 2px dashed rgba(255, 179, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px var(--accent-color));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        h1 span {
+            color: var(--accent-color);
+            text-shadow: 0 0 15px rgba(255, 179, 0, 0.6);
+        }
+
+        .subtitle {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Poster Styling */
+        .poster-container {
+            text-align: center;
+            margin: 20px 0 40px 0;
+        }
+
+        .server-poster {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(255, 179, 0, 0.15);
+            border: 3px solid var(--accent-color);
+        }
+
+        /* Timers Layout */
+        .timers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .timer-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6), inset 0 0 15px rgba(255, 179, 0, 0.05);
+        }
+
+        .timer-card h2 {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .time-box {
+            background-color: rgba(0,0,0,0.5);
+            padding: 12px;
+            border-radius: 10px;
+            min-width: 75px;
+            border: 1px solid rgba(255, 179, 0, 0.3);
+        }
+
+        .time-box .num {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(255, 179, 0, 0.4);
+        }
+
+        .time-box .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .status-text {
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-top: 10px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Section Headings */
+        .section-title {
+            margin: 50px 0 25px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .section-title span {
+            color: var(--accent-color);
+        }
+
+        /* Features/Rules Layout */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 179, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            transition: transform 0.2s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-color);
+        }
+
+        .feature-card h4 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Events Section Custom Grid */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .event-card {
+            background: linear-gradient(135deg, #251c0e 0%, #171108 100%);
+            padding: 25px 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 179, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .event-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            display: block;
+            filter: drop-shadow(0 0 5px rgba(255,179,0,0.3));
+        }
+
+        .event-card h4 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-discord {
+            display: block;
+            width: fit-content;
+            margin: 50px auto 0 auto;
+            background: linear-gradient(135deg, #ffb300 0%, #ff8f00 100%);
+            color: #0d0a05;
+            text-decoration: none;
+            padding: 16px 45px;
+            border-radius: 35px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 20px rgba(255, 179, 0, 0.4);
+        }
+
+        .btn-discord:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(255, 179, 0, 0.6);
+        }
+
+        .footer-text {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255, 179, 0, 0.1);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">🐝🍯👑</div>
+        <h1>HONEYCOMB <span>OASIS</span></h1>
+        <p class="subtitle">👑 SERVER ID: b737547 👑</p>
+    </header>
+
+    <div class="container">
+
+        <div class="poster-container">
+            <img src="https://cdn.discordapp.com/attachments/1504627045890789466/1522014552726704159/file_000000003760720cbca607195b1a2377.png?ex=6a4d8583&is=6a4c3403&hm=a76089639e61fa4c3299223d43d359bb06ddb7d5d49f777875c3b3e6e59d2885&" alt="Honeycomb Oasis Flyer" class="server-poster">
+        </div>
+        
+        <div class="timers-grid">
+            
+            <div class="timer-card">
+                <h2>⚔️ WEEKEND RAIDING ⚔️</h2>
+                <p style="color: var(--text-muted); font-weight: 600;">Friday 7:30 AM EST — Monday 7:30 AM EST</p>
+                <div class="countdown" id="raid-countdown">
+                    <div class="time-box"><span class="num" id="r-days">00</span><span class="label">Days</span></div>
+                    <div class="time-box"><span class="num" id="r-hours">00</span><span class="label">Hours</span></div>
+                    <div class="time-box"><span class="num" id="r-mins">00</span><span class="label">Mins</span></div>
+                    <div class="time-box"><span class="num" id="r-secs">00</span><span class="label">Secs</span></div>
+                </div>
+                <div class="status-text" id="raid-status">Calculating...</div>
+            </div>
+
+            <div class="timer-card">
+                <h2>📅 MONTHLY MAP WIPE 📅</h2>
+                <p style="color: var(--text-muted); font-weight: 600;">Last Thursday of the Month at 2:00 PM EST</p>
+                <div class="countdown" id="wipe-countdown">
+                    <div class="time-box"><span class="num" id="w-days">00</span><span class="label">Days</span></div>
+                    <div class="time-box"><span class="num" id="w-hours">00</span><span class="label">Hours</span></div>
+                    <div class="time-box"><span class="num" id="w-mins">00</span><span class="label">Mins</span></div>
+                    <div class="time-box"><span class="num" id="w-secs">00</span><span class="label">Secs</span></div>
+                </div>
+                <div class="status-text" id="wipe-status">Calculating...</div>
+            </div>
+
+        </div>
+
+        <h3 class="section-title">🔥 <span>ACTIVE HIVE EVENTS</span> 🔥</h3>
+        <div class="events-grid">
+            <div class="event-card">
+                <span class="icon">🔫</span>
+                <h4>Gun Game</h4>
+            </div>
+            <div class="event-card">
+                <span class="icon">🌀</span>
+                <h4>Portal Deathmatch</h4>
+            </div>
+            <div class="event-card">
+                <span class="icon">💥</span>
+                <h4>Bradley Events</h4>
+            </div>
+            <div class="event-card">
+                <span class="icon">🚁</span>
+                <h4>Heli Events</h4>
+            </div>
+            <div class="event-card">
+                <span class="icon">⚔️</span>
+                <h4>Arena Battles</h4>
+            </div>
+        </div>
+
+        <h3 class="section-title">✨ <span>DISCORD PERKS & ECONOMY</span> ✨</h3>
+        <div class="features-grid" style="margin-bottom: 40px;">
+            <div class="feature-card">
+                <h4>🎫 THE OASIS BATTLE PASS</h4>
+                <p>Level up your activity! Earn points through active play and community engagements to unlock exclusive custom rewards, ranks, and server gear.</p>
+            </div>
+            <div class="feature-card">
+                <h4>💰 SERVER ECONOMY GAMES</h4>
+                <p>Stack up your wealth! Engage with our interactive Discord mini-games, gamble your currency, trade items, and rule the local marketplace leaderboard.</p>
+            </div>
+            <div class="feature-card">
+                <h4>🎁 EVENTS & GIVEAWAYS</h4>
+                <p>Join up for regular community gear distribution, exclusive flash drops, and structured Discord events packed with high-tier loot packages.</p>
+            </div>
+        </div>
+
+        <h3 class="section-title">📜 <span>SERVER RULES & DEFENSE</span> 📜</h3>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h4>🌿 PVE MAIN WORLD</h4>
+                <p>Build safely! The main world space runs on a strict PvE standard—no random base wiping, killing, or griefing outside of server event rules.</p>
+            </div>
+            <div class="feature-card">
+                <h4>🛡️ OFFLINE PROTECTION (ORP)</h4>
+                <p>Balanced gameplay matters here! Custom Offline Raid Protection is fully integrated to secure your base while logged off, blocking toxic offline raids.</p>
+            </div>
+            <div class="feature-card">
+                <h4>🌀 CUSTOM PORTAL SYSTEM</h4>
+                <p>Fast travel across the Oasis! Instantly teleport across key landmarks and safe zones utilizing the specialized server portal network.</p>
+            </div>
+            <div class="feature-card">
+                <h4>💣 WEEKEND RAID WINDOWS</h4>
+                <p>Action goes live on weekends! Raiding unlocks completely from Friday morning straight through until Monday morning. Prep your walls!</p>
+            </div>
+            <div class="feature-card">
+                <h4>💀 7-DAY PURGE LOOP</h4>
+                <p>The ultimate test! Exactly seven days before the targeted last Thursday monthly map wipe, defenses drop and raiding runs 24/7 until wipe.</p>
+            </div>
+        </div>
+
+        <a href="https://discord.gg/E7JxSU6kz9" class="btn-discord" target="_blank">🐝 JOIN THE HIVE ON DISCORD 🐝</a>
+
+        <div class="footer-text">
+            <p>🍯 HONEYCOMB OASIS — WHERE LEGENDS ARE MADE. WHERE HIVE BECOMES FAMILY. 🍯</p>
+            <p style="margin-top: 8px; opacity: 0.4; font-size: 0.75rem;">Rust Console Edition is a trademark of Facepunch Studios & Double Eleven.</p>
+        </div>
+
+    </div>
+
+    <script>
+        function updateTimers() {
+            const nowStr = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
+            const now = new Date(nowStr);
+            const currentYear = now.getFullYear();
+            const currentMonth = now.getMonth();
+
+            // --- 1. MONTHLY WIPE TIMER CALCULATION (LAST THURSDAY) ---
+            function getLastThursday(year, month) {
+                let date = new Date(year, month + 1, 0);
+                while (date.getDay() !== 4) {
+                    date.setDate(date.getDate() - 1);
+                }
+                date.setHours(14, 0, 0, 0); 
+                return new Date(date.toLocaleString("en-US", {timeZone: "America/New_York"}));
+            }
+
+            let targetWipe = getLastThursday(currentYear, currentMonth);
+            
+            if (now > targetWipe) {
+                targetWipe = getLastThursday(currentYear, currentMonth + 1);
+            }
+
+            const wipeDiff = targetWipe - now;
+            renderTime(wipeDiff, 'w-');
+            
+            const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000;
+            if (wipeDiff <= sevenDaysInMs && wipeDiff > 0) {
+                document.getElementById('wipe-status').innerText = "🔥 PURGE WEEK ACTIVE! 🔥";
+            } else {
+                document.getElementById('wipe-status').innerText = "🛡️ Safe Mode Active 🛡️";
+            }
+
+            // --- 2. WEEKEND RAID TIMER CALCULATION ---
+            const currentDay = now.getDay(); 
+            let raidStatus = "";
+            let raidDiff = 0;
+
+            let nextFriday = new Date(now);
+            nextFriday.setDate(now.getDate() + (5 - currentDay + 7) % 7);
+            nextFriday.setHours(7, 30, 0, 0);
+
+            let nextMonday = new Date(now);
+            nextMonday.setDate(now.getDate() + (1 - currentDay + 7) % 7);
+            nextMonday.setHours(7, 30, 0, 0);
+
+            if (currentDay === 5 && (now.getHours() > 7 || (now.getHours() === 7 && now.getMinutes() >= 30))) {
+                nextFriday.setDate(nextFriday.getDate() - 7);
+            }
+            if (currentDay === 1 && (now.getHours() > 7 || (now.getHours() === 7 && now.getMinutes() >= 30))) {
+                nextMonday.setDate(nextMonday.getDate() + 7);
+            } else if (currentDay > 1 && currentDay <= 4) {
+                nextMonday.setDate(nextMonday.getDate() + 7);
+            }
+
+            if (now >= nextFriday && now < nextMonday) {
+                raidStatus = "💥 RAIDING OPEN UNTIL MONDAY 💥";
+                raidDiff = nextMonday - now;
+            } else {
+                raidStatus = "🔒 Raiding Opens Friday 🔒";
+                if (now > nextMonday) {
+                    nextFriday.setDate(nextFriday.getDate() + 7);
+                }
+                raidDiff = nextFriday - now;
+            }
+
+            if (wipeDiff <= sevenDaysInMs) {
+                raidStatus = "⚡ PURGE UNLOCKED 24/7 ⚡";
+                document.getElementById('r-days').innerText = "00";
+                document.getElementById('r-hours').innerText = "00";
+                document.getElementById('r-mins').innerText = "00";
+                document.getElementById('r-secs').innerText = "00";
+            } else {
+                renderTime(raidDiff, 'r-');
+            }
+            document.getElementById('raid-status').innerText = raidStatus;
+        }
+
+        function renderTime(diff, prefix) {
+            if (diff <= 0) diff = 0;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById(prefix + 'days').innerText = String(days).padStart(2, '0');
+            document.getElementById(prefix + 'hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById(prefix + 'mins').innerText = String(mins).padStart(2, '0');
+            document.getElementById(prefix + 'secs').innerText = String(secs).padStart(2, '0');
+        }
+
+        updateTimers();
+        setInterval(updateTimers, 1000);
+    </script>
+</body>
+</html>
