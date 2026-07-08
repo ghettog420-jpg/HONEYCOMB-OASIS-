@@ -6,262 +6,339 @@
     <title>Honeycomb Oasis | Server Hub</title>
     <style>
         :root {
-            --bg-color: #0d0a05; /* Deep rich dark brown/black */
-            --card-bg: #1c150b; /* Honey-tinted dark card backgrounds */
+            --bg-color: #0b0804; /* Extra deep midnight amber-black */
+            --card-bg: #161007; /* Dark honeycomb core */
             --accent-color: #ffb300; /* Pure golden honey amber */
-            --accent-hover: #ffca28; /* Shining bright gold */
-            --text-color: #fff8e1; /* Warm, soft honey-tinted white */
-            --text-muted: #d7ccc8; /* Soft warm amber-gray */
+            --accent-hover: #ffca28; /* Liquid bright gold */
+            --text-color: #fff8e1; /* Smooth cream white */
+            --text-muted: #cdbfb2; /* Warm silt gray */
+            --glow: 0 0 15px rgba(255, 179, 0, 0.35);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            padding-bottom: 60px;
+            padding-bottom: 80px;
+            background-image: 
+                radial-gradient(circle at 20% 15%, rgba(255, 179, 0, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 179, 0, 0.05) 0%, transparent 40%);
         }
 
         header {
             text-align: center;
-            padding: 50px 20px 20px 20px;
-            background: linear-gradient(180deg, rgba(255, 179, 0, 0.25) 0%, rgba(13, 10, 5, 1) 100%);
-            border-bottom: 2px dashed rgba(255, 179, 0, 0.2);
+            padding: 60px 20px 40px 20px;
+            background: linear-gradient(180deg, rgba(255, 179, 0, 0.15) 0%, rgba(11, 8, 4, 0) 100%);
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
         }
 
         .logo {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 10px var(--accent-color));
-            animation: float 3s ease-in-out infinite;
+            font-size: 4.5rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 12px var(--accent-color));
+            animation: hoverEffect 4s ease-in-out infinite;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        @keyframes hoverEffect {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
 
         h1 {
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             color: #ffffff;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 4px;
+            font-weight: 900;
         }
 
         h1 span {
             color: var(--accent-color);
-            text-shadow: 0 0 15px rgba(255, 179, 0, 0.6);
+            text-shadow: 0 0 20px rgba(255, 179, 0, 0.5);
         }
 
         .subtitle {
             color: var(--accent-color);
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-top: 10px;
-            letter-spacing: 1px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 12px;
+            letter-spacing: 2px;
+            background: rgba(255, 179, 0, 0.1);
+            display: inline-block;
+            padding: 4px 18px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 179, 0, 0.2);
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1050px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* Poster Styling */
+        /* Poster Area */
         .poster-container {
             text-align: center;
-            margin: 20px 0 40px 0;
+            margin: 30px 0 50px 0;
         }
 
         .server-poster {
             max-width: 100%;
             height: auto;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(255, 179, 0, 0.15);
-            border: 3px solid var(--accent-color);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 179, 0, 0.15);
+            border: 2px solid rgba(255, 179, 0, 0.4);
         }
 
-        /* Timers Layout */
+        /* Countdown Timers */
         .timers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .timer-card {
             background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 30px;
+            border-radius: 20px;
+            padding: 35px 25px;
             text-align: center;
-            border: 2px solid var(--accent-color);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.6), inset 0 0 15px rgba(255, 179, 0, 0.05);
+            border: 1px solid rgba(255, 179, 0, 0.25);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .timer-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.6), var(--glow);
         }
 
         .timer-card h2 {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             color: #ffffff;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+        }
+
+        .timer-schedule {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 15px;
         }
 
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
+            gap: 12px;
+            margin: 24px 0;
         }
 
         .time-box {
-            background-color: rgba(0,0,0,0.5);
-            padding: 12px;
-            border-radius: 10px;
-            min-width: 75px;
-            border: 1px solid rgba(255, 179, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 14px 10px;
+            border-radius: 12px;
+            min-width: 78px;
+            border: 1px solid rgba(255, 179, 0, 0.15);
         }
 
         .time-box .num {
             display: block;
-            font-size: 2.2rem;
-            font-weight: bold;
+            font-size: 2.4rem;
+            font-weight: 800;
             color: var(--accent-color);
-            text-shadow: 0 0 10px rgba(255, 179, 0, 0.4);
+            text-shadow: 0 0 10px rgba(255, 179, 0, 0.3);
+            line-height: 1.1;
         }
 
         .time-box .label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-top: 4px;
+            display: block;
         }
 
         .status-text {
-            font-weight: 700;
+            font-weight: 800;
             color: var(--accent-color);
-            margin-top: 10px;
+            margin-top: 15px;
             font-size: 1.2rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         /* Section Headings */
         .section-title {
-            margin: 50px 0 25px 0;
+            margin: 60px 0 30px 0;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             color: #ffffff;
             text-align: center;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            position: relative;
         }
         
         .section-title span {
             color: var(--accent-color);
         }
 
-        /* Features/Rules Layout */
+        /* Mini Event Cards */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .event-card {
+            background: linear-gradient(135deg, #1f160a 0%, #110c05 100%);
+            padding: 25px 15px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 179, 0, 0.15);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .event-card .icon {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .event-card h4 {
+            color: #ffffff;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Feature Matrix */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
 
         .feature-card {
             background-color: var(--card-bg);
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 179, 0, 0.2);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-            transition: transform 0.2s;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 179, 0, 0.15);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
         
         .feature-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             border-color: var(--accent-color);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
         }
 
         .feature-card h4 {
             color: var(--accent-color);
-            margin-bottom: 10px;
-            font-size: 1.2rem;
+            margin-bottom: 12px;
+            font-size: 1.25rem;
             text-transform: uppercase;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            letter-spacing: 0.5px;
         }
 
         .feature-card p {
             font-size: 0.95rem;
             color: var(--text-muted);
+            line-height: 1.6;
         }
 
-        /* Events Section Custom Grid */
-        .events-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
+        /* Webstore Highlight Card Styles */
+        .feature-card.premium-vault {
+            border: 1px solid var(--accent-color);
+            background: linear-gradient(135deg, #221808 0%, #161007 100%);
+            box-shadow: 0 6px 20px rgba(255, 179, 0, 0.08);
         }
 
-        .event-card {
-            background: linear-gradient(135deg, #251c0e 0%, #171108 100%);
-            padding: 25px 20px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid rgba(255, 179, 0, 0.2);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-
-        .event-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 12px;
-            display: block;
-            filter: drop-shadow(0 0 5px rgba(255,179,0,0.3));
-        }
-
-        .event-card h4 {
-            color: #ffffff;
-            font-size: 1.2rem;
+        .vault-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #0b0804;
+            background-color: var(--accent-color);
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s, transform 0.2s;
         }
 
+        .vault-link:hover {
+            background-color: var(--accent-hover);
+            transform: scale(1.03);
+        }
+
+        /* Discord Button Placement */
         .btn-discord {
             display: block;
             width: fit-content;
-            margin: 50px auto 0 auto;
+            margin: 60px auto 0 auto;
             background: linear-gradient(135deg, #ffb300 0%, #ff8f00 100%);
-            color: #0d0a05;
+            color: #0b0804;
             text-decoration: none;
-            padding: 16px 45px;
-            border-radius: 35px;
-            font-weight: 800;
-            font-size: 1.2rem;
+            padding: 18px 50px;
+            border-radius: 40px;
+            font-weight: 850;
+            font-size: 1.25rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 5px 20px rgba(255, 179, 0, 0.4);
+            box-shadow: 0 6px 25px rgba(255, 179, 0, 0.35);
         }
 
         .btn-discord:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(255, 179, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(255, 179, 0, 0.55);
         }
 
         .footer-text {
             text-align: center;
             color: var(--text-muted);
             font-size: 0.9rem;
-            margin-top: 80px;
+            margin-top: 100px;
             border-top: 1px solid rgba(255, 179, 0, 0.1);
-            padding-top: 20px;
+            padding-top: 30px;
         }
     </style>
 </head>
@@ -276,14 +353,14 @@
     <div class="container">
 
         <div class="poster-container">
-            <img src="https://cdn.discordapp.com/attachments/1504627045890789466/1522014552726704159/file_000000003760720cbca607195b1a2377.png?ex=6a4d8583&is=6a4c3403&hm=a76089639e61fa4c3299223d43d359bb06ddb7d5d49f777875c3b3e6e59d2885&" alt="Honeycomb Oasis Flyer" class="server-poster">
+            <img src="https://cdn.discordapp.com/attachments/1504627045890789466/1522014552726704159/file_000000003760720cbca607195b1a2377.png?ex=6a4f7fc3&is=6a4e2e43&hm=68bff15bc1c1a3e81e1a81036881d92925f53f21f0a59d77553f21ae58bf5bfb&" alt="Honeycomb Oasis Flyer" class="server-poster">
         </div>
         
         <div class="timers-grid">
             
             <div class="timer-card">
                 <h2>⚔️ WEEKEND RAIDING ⚔️</h2>
-                <p style="color: var(--text-muted); font-weight: 600;">Friday 7:30 AM EST — Monday 7:30 AM EST</p>
+                <p class="timer-schedule">Friday 7:30 AM EST — Monday 7:30 AM EST</p>
                 <div class="countdown" id="raid-countdown">
                     <div class="time-box"><span class="num" id="r-days">00</span><span class="label">Days</span></div>
                     <div class="time-box"><span class="num" id="r-hours">00</span><span class="label">Hours</span></div>
@@ -294,8 +371,8 @@
             </div>
 
             <div class="timer-card">
-                <h2>📅 MONTHLY MAP WIPE 📅</h2>
-                <p style="color: var(--text-muted); font-weight: 600;">Last Thursday of the Month at 2:00 PM EST</p>
+                <h2>💥 MAP WIPE 💥</h2>
+                <p class="timer-schedule">Last Thursday of the Month at 2:00 PM EST</p>
                 <div class="countdown" id="wipe-countdown">
                     <div class="time-box"><span class="num" id="w-days">00</span><span class="label">Days</span></div>
                     <div class="time-box"><span class="num" id="w-hours">00</span><span class="label">Hours</span></div>
@@ -334,7 +411,7 @@
         <h3 class="section-title">✨ <span>DISCORD PERKS & ECONOMY</span> ✨</h3>
         <div class="features-grid" style="margin-bottom: 40px;">
             <div class="feature-card">
-                <h4>🎫 THE OASIS BATTLE PASS</h4>
+                <h4>🎫 THE ALPHA HIVE PASS</h4>
                 <p>Level up your activity! Earn points through active play and community engagements to unlock exclusive custom rewards, ranks, and server gear.</p>
             </div>
             <div class="feature-card">
@@ -344,6 +421,15 @@
             <div class="feature-card">
                 <h4>🎁 EVENTS & GIVEAWAYS</h4>
                 <p>Join up for regular community gear distribution, exclusive flash drops, and structured Discord events packed with high-tier loot packages.</p>
+            </div>
+            <div class="feature-card">
+                <h4>📦 STORAGE WARS</h4>
+                <p>Bid, secure, and profit! Engage in our unique economy-driven live auctions for locked storage containers. Place your bids, beat your rivals, and claim your hidden fortune.</p>
+            </div>
+            <div class="feature-card premium-vault">
+                <h4>👑 PREMIUM HIVE VAULT</h4>
+                <p>Access high-tier kits, custom server perks, and progression boosters directly inside our server webstore. Support the Oasis and rule the hive!</p>
+                <a href="https://honeycomboasis.tip4serv.com" class="vault-link" target="_blank">🔓 Open the Vault</a>
             </div>
         </div>
 
@@ -368,6 +454,18 @@
             <div class="feature-card">
                 <h4>💀 7-DAY PURGE LOOP</h4>
                 <p>The ultimate test! Exactly seven days before the targeted last Thursday monthly map wipe, defenses drop and raiding runs 24/7 until wipe.</p>
+            </div>
+            <div class="feature-card">
+                <h4>🚢 DOCKED CARGO ZONES</h4>
+                <p>High-stakes operations! Fight for custom loot inside designated docked cargo zones. Coordinate with your team and secure the area's top-tier crates.</p>
+            </div>
+            <div class="feature-card">
+                <h4>💎 CUSTOM RESOURCE NODES</h4>
+                <p>Upgrade your gathering! Explore the Oasis map to harvest custom, high-yield resource nodes strategically placed to boost your progression loop.</p>
+            </div>
+            <div class="feature-card">
+                <h4>🛠️ ACTIVE & HELPFUL ADMINS</h4>
+                <p>Dedicated staff support! Our active admin team is always present and genuinely loves to help, guide, and teach both new and experienced players alike.</p>
             </div>
         </div>
 
